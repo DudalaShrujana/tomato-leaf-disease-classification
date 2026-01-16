@@ -19,19 +19,29 @@ Dockerized for consistent deployment
 Clean GitHub repository structure with screenshots and documentation
 
 📂 Project Structure
+
 tomato-disease-detection/
-│
-├── app.py                 # Streamlit application
-├── Dockerfile             # Docker deployment
-├── requirements.txt       # Python dependencies
-├── README.md              # Project documentation
-├── tomato_model.h5        # Trained CNN model
-├── src/                   # Training scripts and preprocessing
-│   ├── train.py
-│   ├── model.py
-│   └── preprocess.py
-├── screenshots/           # Screenshots for README & PPT
-└── docs/                  # Additional documentation (optional)
+|
+
+├── app.py # Streamlit application
+
+├── Dockerfile # Docker deployment
+
+├── requirements.txt # Python dependencies
+
+├── README.md # Project documentation
+
+├── tomato_model.h5 # Trained CNN model
+
+├── src/ # Training scripts and preprocessing
+
+│ ├── train.py
+
+│ ├── model.py
+
+│ └── preprocess.py
+
+├── screenshots/ # Screenshots for README & PPT
 
 📊 Dataset
 
@@ -62,18 +72,20 @@ Batch Size: 32
 
 Validation Accuracy: ~78–82%
 
-📈 Epoch-wise Training Summary
-Epoch	Training Accuracy	Validation Accuracy	Training Loss	Validation Loss
-1	42%	49%	1.61	1.52
-2	60%	66%	1.10	0.94
-3	65%	74%	0.97	0.75
-4	69%	71%	0.87	0.93
-5	71%	76%	0.81	0.67
-6	73%	75%	0.76	0.84
-7	73%	77%	0.74	0.71
-8	75%	78%	0.68	—
-9	76%	79%	—	—
-10	77–80%	78–80%	—	—
+## 📈 Epoch-wise Training Summary
+
+| Epoch | Training Accuracy | Validation Accuracy | Training Loss | Validation Loss |
+|-------|-----------------|------------------|---------------|----------------|
+| 1     | 42%             | 49%              | 1.61          | 1.52           |
+| 2     | 60%             | 66%              | 1.10          | 0.94           |
+| 3     | 65%             | 74%              | 0.97          | 0.75           |
+| 4     | 69%             | 71%              | 0.87          | 0.93           |
+| 5     | 71%             | 76%              | 0.81          | 0.67           |
+| 6     | 73%             | 75%              | 0.76          | 0.84           |
+| 7     | 73%             | 77%              | 0.74          | 0.71           |
+| 8     | 75%             | 78%              | 0.68          | -              |
+| 9     | 76%             | 79%              | -             | -              |
+| 10    | 77–80%          | 78–80%           | -    
 
 Observations:
 
@@ -172,3 +184,4 @@ Multi-crop disease detection
 Mobile application integration
 
 Real-time disease monitoring system
+

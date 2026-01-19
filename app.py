@@ -1,43 +1,77 @@
-from flask import Flask, request, jsonify
-import tensorflow as tf
+import streamlit as st
+import os
+import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-import numpy as np
-import os
+from PIL import Image
 
-app = Flask(__name__)
+# -----------------------------
+# SAFE MODEL LOADING
+# -----------------------------
+MODEL_PATH = os.path.join(os.getcwd(), "tomato_model.h5")
 
-# Load your model
-MODEL_PATH = "tomato_model.h5"
+if not os.path.exists(MODEL_PATH):
+    st.error("❌ Model file NOT FOUND inside container!")
+    st.write("Available files:", os.listdir())
+    st.stop()
+
 model = load_model(MODEL_PATH)
 
-# Example route to test
-@app.route('/')
-def home():
-    return "Tomato Disease Detection API is running!"
+# -----------------------------
+# Class names (exact order as training)
+# -----------------------------
+class_names = [
+    "Bacterial Spot",
+    "Early Blight",
+    "Late Blight",
+    "Leaf Mold",
+    "Septoria Leaf Spot",
+    "Spider Mites",
+    "Target Spot",
+    "Tomato Yellow Leaf Curl Virus",
+    "Tomato Mosaic Virus",
+    "Healthy"
+]
 
-# Example inference route
-@app.route('/predict', methods=['POST'])
-def predict():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file provided'}), 400
-    
-    img_file = request.files['file']
-    img_path = os.path.join("temp.jpg")
-    img_file.save(img_path)
-    
-    # Preprocess image
-    img = image.load_img(img_path, target_size=(128,128))  # adjust size to your model
-    img_array = image.img_to_array(img)/255.0
+# -----------------------------
+# UI
+# -----------------------------
+st.set_page_config(page_title="Tomato Disease Detection", page_icon="🍅")
+
+st.title("🍅 Tomato Plant Disease Detection")
+st.write("Upload a tomato leaf image — AI will tell the EXACT disease name.")
+
+uploaded_file = st.file_uploader("Choose a leaf image", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+
+    img = Image.open(uploaded_file)
+    st.image(img, caption="Uploaded Image", use_column_width=True)
+
+    # ---- PREPROCESS ----
+    img = img.convert("RGB")
+    img = img.resize((224, 224))
+
+    img_array = image.img_to_array(img)
+    img_array = img_array / 255.0
     img_array = np.expand_dims(img_array, axis=0)
-    
-    # Predict
-    prediction = model.predict(img_array)
-    predicted_class = str(np.argmax(prediction, axis=1)[0])
-    
-    os.remove(img_path)
-    return jsonify({'predicted_class': predicted_class})
 
-if __name__ == "__main__":
-    # IMPORTANT: host=0.0.0.0 so Docker exposes it
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # ---- PREDICTION ----
+    pred = model.predict(img_array)[0]
+
+    pred_class_index = np.argmax(pred)
+    pred_class_name = class_names[pred_class_index]
+    confidence = float(pred[pred_class_index]) * 100
+
+    # ---- SHOW ONLY EXACT NAME ----
+    st.subheader("🧪 Result")
+
+    if confidence < 60:
+        st.warning("⚠ Image unclear — please upload a clearer tomato leaf photo.")
+    else:
+        if pred_class_name == "Healthy":
+            st.success("✅ Leaf is HEALTHY — No disease detected")
+        else:
+            st.error(f"🚨 Disease Detected: {pred_class_name}")
+
+        st.info(f"🎯 Confidence: {confidence:.2f}%")

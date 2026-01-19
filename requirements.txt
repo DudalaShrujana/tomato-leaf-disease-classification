@@ -1,9 +1,10 @@
-tensorflow
-streamlit
-numpy
 pillow
-matplotlib
+flask
+tensorflow
+numpy
 pandas
 opencv-python
-flask
+matplotlib
+scikit-learn
+streamlit
 

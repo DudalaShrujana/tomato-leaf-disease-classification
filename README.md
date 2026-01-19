@@ -21,27 +21,27 @@ Clean GitHub repository structure with screenshots and documentation
 📂 Project Structure
 
 tomato-disease-detection/
-|
+  |
 
-├── app.py # Streamlit application
+  ├── app.py # Streamlit application
 
-├── Dockerfile # Docker deployment
+  ├── Dockerfile # Docker deployment
 
-├── requirements.txt # Python dependencies
+  ├── requirements.txt # Python dependencies
 
-├── README.md # Project documentation
-
-├── tomato_model.h5 # Trained CNN model
-
-├── src/ # Training scripts and preprocessing
-
-│ ├── train.py
-
-│ ├── model.py
-
-│ └── preprocess.py
-
-├── screenshots/ # Screenshots for README & PPT
+  ├── README.md # Project documentation
+  
+  ├── tomato_model.h5 # Trained CNN model
+  
+  ├── src/ # Training scripts and preprocessing
+  
+  │ ├── train.py
+  
+  │ ├── model.py
+  
+  │ └── preprocess.py
+  
+  ├── screenshots/ # Screenshots for README & PPT
 
 📊 Dataset
 
@@ -184,4 +184,5 @@ Multi-crop disease detection
 Mobile application integration
 
 Real-time disease monitoring system
+
 

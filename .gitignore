@@ -7,8 +7,9 @@ dataset/
 # Ignore model files
 *.h5
 
-# Ignore environment files
-.env
+# Ignore virtual environment
+tomato_env/
+
 
 # Ignore OS files
 .DS_Store

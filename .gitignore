@@ -1,16 +1,25 @@
-# Ignore Python cache
+# Python cache
 __pycache__/
+*.pyc
 
-# Ignore dataset folder
+# Datasets
 dataset/
 
-# Ignore model files
+# Model files
 *.h5
+*.pt
+*.onnx
 
-# Ignore virtual environment
+# Virtual environments
 tomato_env/
+venv/
+env/
+.venv/
 
+# Streamlit
+.streamlit/
+*.log
 
-# Ignore OS files
+# OS files
 .DS_Store
 Thumbs.db

@@ -19,17 +19,28 @@ This project detects diseases in tomato plant leaves using a Convolutional Neura
 
 tomato-disease-detection/
 |
-├── app.py                 # Streamlit application
+
+├── app.py    # Streamlit application
+
 ├── Dockerfile             # Docker deployment
+
 ├── requirements.txt       # Python dependencies
+
 ├── README.md              # Project documentation
+
 ├── tomato_model.h5        # Trained CNN model
+
 ├── src/                   # Training scripts and preprocessing
+
 │   ├── train.py
+
 │   ├── model.py
+
 │   └── preprocess.py
+
 ├── screenshots/           # Screenshots for README & PPT
-└── docs/                  # Additional documentation (optional)
+
+
 
 ---
 
